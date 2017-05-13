@@ -1,12 +1,21 @@
 var path = require('path')
 var webpack = require('webpack')
+var fs = require('fs')
+
+
+const entries = fs.readdirSync('./src/main/js')
+                  .filter(a => /\.js$/.test(a))
+                  .reduce((acc, x) => {
+                    acc[x.slice(0, -3)] = './src/main/js/' + x
+                    return acc
+                  }, {})
 
 module.exports = {
-  entry: './src/main/js/main.js',
+  entry: entries,
   output: {
     path: path.resolve(__dirname, './build/classes/main/static/js'),
     publicPath: '/js/',
-    filename: 'build.js'
+    filename: '[name].js'
   },
   module: {
     rules: [

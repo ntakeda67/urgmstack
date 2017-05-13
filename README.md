@@ -1,18 +1,24 @@
-# spring-boot-doma-vue-sample
+# Spring Boot + Doma + Vue Sample
 
-> A Vue.js project
+## Setup
 
-## Build Setup
-
-``` bash
-# install dependencies
+```console
 npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Run
+
+1. Run Spring Boot application by IDE
+2. `npm run dev`
+3. Browse http://localhost:8080
+
+## Build
+
+```console
+gradlew build
+```
+
+## License
+
+Licensed under [The MIT License](https://opensource.org/licenses/MIT)
+

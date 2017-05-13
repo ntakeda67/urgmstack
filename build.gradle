@@ -47,3 +47,13 @@ springBoot {
     executable = true
 }
 
+task npmRunBuild {
+  doLast {
+    if (file('./node_modules').exists() ==  false) {
+      "npm install".execute().waitForProcessOutput(System.out, System.err)
+    }
+    "npm run build".execute().waitForProcessOutput(System.out, System.err)
+  }
+}
+processResources.dependsOn npmRunBuild
+

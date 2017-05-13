@@ -2,13 +2,13 @@ var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
 
-
+const vendor = { vendor: ['vue'] }
 const entries = fs.readdirSync('./src/main/js')
                   .filter(a => /\.js$/.test(a))
                   .reduce((acc, x) => {
                     acc[x.slice(0, -3)] = './src/main/js/' + x
                     return acc
-                  }, {})
+                  }, vendor)
 
 module.exports = {
   entry: entries,
@@ -75,6 +75,10 @@ if (process.env.NODE_ENV === 'production') {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "vendor",
+      minChunks: Infinity
     })
   ])
 }

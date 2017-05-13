@@ -2,10 +2,10 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './src/main.js',
+  entry: './src/main/js/main.js',
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, './build/classes/main/static/js'),
+    publicPath: '/js/',
     filename: 'build.js'
   },
   module: {
@@ -40,7 +40,8 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    contentBase: path.join(__dirname, "./bin/static")
   },
   performance: {
     hints: false

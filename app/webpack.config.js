@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
 
-const vendor = { vendor: ['vue'] }
+const vendor = { vendor: ['vue', 'axios'] }
 const entries = fs.readdirSync('./src/main/js')
                   .filter(a => /\.js$/.test(a))
                   .reduce((acc, x) => {
@@ -13,8 +13,8 @@ const entries = fs.readdirSync('./src/main/js')
 module.exports = {
   entry: entries,
   output: {
-    path: path.resolve(__dirname, './build/classes/main/static/js'),
-    publicPath: '/js/',
+    path: path.resolve(__dirname, './build/classes/main/static/assets'),
+    publicPath: process.env.NODE_ENV === 'production' ? '/assets/' : '//localhost:8888/assets/',
     filename: '[name].js'
   },
   module: {
@@ -24,6 +24,7 @@ module.exports = {
         loader: 'vue-loader',
         options: {
           loaders: {
+            sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
           }
           // other vue-loader options go here
         }
@@ -39,6 +40,22 @@ module.exports = {
         options: {
           name: '[name].[ext]?[hash]'
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.sass$/,
+        loader: 'style-loader!css-loader!sass-loader?indentedSyntax'
+      },
+      {
+        test: /\.(otf|eot|svg|ttf|woff|woff2)$/,
+//        loader: 'url-loader'
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]?[hash]'
+        }
       }
     ]
   },
@@ -50,7 +67,11 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    contentBase: path.join(__dirname, "./bin/static")
+    contentBase: path.join(__dirname, "./bin/static"),
+    port: 8888,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   },
   performance: {
     hints: false

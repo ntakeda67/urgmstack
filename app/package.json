@@ -9,6 +9,9 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "axios": "^0.16.1",
+    "bulma": "^0.4.2",
+    "font-awesome": "^4.7.0",
     "vue": "^2.2.1"
   },
   "devDependencies": {
@@ -18,7 +21,11 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.1",
     "vue-loader": "^11.1.4",
+    "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"

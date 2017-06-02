@@ -48,12 +48,17 @@ springBoot {
 }
 
 task npmRunBuild {
-  doLast {
-    if (file('./node_modules').exists() ==  false) {
-      "npm install".execute().waitForProcessOutput(System.out, System.err)
+    doLast {
+        def npm = { ...args ->
+            def command = ['npm']
+            command += args.toList()
+            new ProcessBuilder(command).directory(file('.')).start().waitForProcessOutput(System.out, System.err)
+        }
+        if (file('./node_modules').exists() ==  false) {
+            npm('install')
+        }
+        npm('run', 'build')
     }
-    "npm run build".execute().waitForProcessOutput(System.out, System.err)
-  }
 }
 processResources.dependsOn npmRunBuild
 

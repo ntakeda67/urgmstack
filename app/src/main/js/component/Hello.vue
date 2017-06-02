@@ -16,7 +16,7 @@
 
 <script>
 import 'bulma/css/bulma.css'
-import axios from 'axios'
+import axios from '../http.js'
 
 export default {
   data () {
@@ -28,7 +28,9 @@ export default {
   methods: {
     hello() {
       const name = this.name
-      axios.get('/api/hello?name=' + name).then(resp => this.message = resp.data)
+      axios.post('/api/hello', { name })
+        .then(resp => resp.data)
+        .then(({ message }) => this.message = message)
     }
   }
 }

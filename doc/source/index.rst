@@ -1,10 +1,10 @@
-.. Spring Boot + Doma + Vue Sample documentation master file, created by
-   sphinx-quickstart on Fri Jun  2 23:05:42 2017.
+.. urgmstack documentation master file, created by
+   sphinx-quickstart on Sat Jun  3 06:49:06 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Spring Boot + Doma + Vue Sample's documentation!
-===========================================================
+Welcome to urgmstack's documentation!
+=====================================
 
 Contents:
 

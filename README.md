@@ -1,5 +1,7 @@
 # Spring Boot + Doma + Vue Sample
 
+http://spring-boot-doma-vue.readthedocs.io/
+
 ## Setup
 
 ```console

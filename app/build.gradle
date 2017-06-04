@@ -41,7 +41,7 @@ dependencies {
 compileJava.dependsOn processResources
 processResources.destinationDir = compileJava.destinationDir
 
-eclipse.project.name = 'sample-app'
+eclipse.project.name = 'urgmstack-app'
 
 springBoot {
     executable = true

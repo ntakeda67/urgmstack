@@ -14,7 +14,7 @@ public class DemoApplication {
 
     @Bean
     JsBasePath jsBasePath(final DevLocal devLocal) {
-        final String value = (devLocal == DevLocal.TRUE) ? "//localhost:8888/assets" : "/assets";
+        final String value = (devLocal == DevLocal.TRUE) ? "//localhost:8888/" : "";
         return new JsBasePath(value);
     }
 

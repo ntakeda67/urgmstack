@@ -4,7 +4,7 @@
     <div class="content">
       <ul>
         <li v-for="menuItem in menuItems">
-          <a :href="'/' + menuItem + '.html'">{{ menuItem }}</a>
+          <a :href="menuItem + '.html'">{{ menuItem }}</a>
         </li>
       </ul>
     </div>

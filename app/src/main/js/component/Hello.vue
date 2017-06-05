@@ -28,7 +28,7 @@ export default {
   methods: {
     hello() {
       const name = this.name
-      axios.post('/api/hello', { name })
+      axios.post('api/hello', { name })
         .then(resp => resp.data)
         .then(({ message }) => this.message = message)
     }

@@ -16,14 +16,14 @@ public class DemoApplication {
     }
 
     @Bean
-    JsBasePath jsBasePath(final DevLocal devLocal) {
-        final String value = (devLocal == DevLocal.TRUE) ? "//localhost:8888/" : "";
+    JsBasePath jsBasePath() {
+        final String value = devLocal().isDevLocal() ? "//localhost:8888/" : "";
         return new JsBasePath(value);
     }
 
     @Bean
-    JsFileChecker jsFileChecker(final DevLocal devLocal) {
-        if (devLocal == DevLocal.TRUE) {
+    JsFileChecker jsFileChecker() {
+        if (devLocal().isDevLocal()) {
             return new DevLocalJsFileChecker();
         }
         return new JarJsFileChecker();
@@ -37,10 +37,10 @@ public class DemoApplication {
                 .getLocation()
                 .getProtocol()
                 .equals("file");
-        return devLocal ? DevLocal.TRUE : DevLocal.FALSE;
+        return () -> devLocal;
     }
 
-    public enum DevLocal {
-        TRUE, FALSE
+    public interface DevLocal {
+        boolean isDevLocal();
     }
 }

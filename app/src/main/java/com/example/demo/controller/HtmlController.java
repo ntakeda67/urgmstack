@@ -2,10 +2,16 @@ package com.example.demo.controller;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -13,15 +19,27 @@ import org.springframework.web.context.WebApplicationContext;
 public class HtmlController {
 
     private final JsBasePath jsBasePath;
+    private final JsFileChecker jsFileChecker;
     private final String contextPath;
 
-    public HtmlController(final JsBasePath jsBasePath, final WebApplicationContext wac) {
+    public HtmlController(final JsBasePath jsBasePath, final JsFileChecker jsFileChecker,
+            final WebApplicationContext wac) {
         this.jsBasePath = Objects.requireNonNull(jsBasePath);
+        this.jsFileChecker = Objects.requireNonNull(jsFileChecker);
         this.contextPath = wac.getServletContext().getContextPath();
     }
 
     @GetMapping("{name}.html")
     String html(@PathVariable final String name, final CsrfToken csrfToken) {
+
+        if (name.equals("vendor")) {
+            throw new JsFileNotFoundException();
+        }
+
+        if (jsFileChecker.exists(name) == false) {
+            throw new JsFileNotFoundException();
+        }
+
         final StringWriter s = new StringWriter();
         try (PrintWriter out = new PrintWriter(s)) {
             out.println("<!DOCTYPE html>");
@@ -58,5 +76,30 @@ public class HtmlController {
         public JsBasePath(final String value) {
             this.value = Objects.requireNonNull(value);
         }
+    }
+
+    public interface JsFileChecker {
+        boolean exists(String name);
+    }
+
+    public static class DevLocalJsFileChecker implements JsFileChecker {
+        @Override
+        public boolean exists(final String name) {
+            final Path jsFile = Paths.get("src", "main", "js", name + ".js");
+            return Files.exists(jsFile);
+        }
+    }
+
+    public static class JarJsFileChecker implements JsFileChecker {
+        @Override
+        public boolean exists(final String name) {
+            final URL resource = getClass().getClassLoader()
+                    .getResource("static/assets/" + name + ".js");
+            return resource != null;
+        }
+    }
+
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public static class JsFileNotFoundException extends RuntimeException {
     }
 }

@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import 'bulma/css/bulma.css'
 import axios from '../http.js'
 
 export default {

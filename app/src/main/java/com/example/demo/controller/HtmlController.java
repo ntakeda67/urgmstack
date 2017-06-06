@@ -60,6 +60,7 @@ public class HtmlController {
             out.println("  <body>");
             out.println("    <div id=\"app\"></div>");
             out.printf("    <script src=\"%1$sassets/vendor.js\"></script>%n", jsBasePath.value);
+            out.printf("    <script src=\"%1$sassets/css.js\"></script>%n", jsBasePath.value);
             out.printf("    <script src=\"%1$sassets/%2$s.js\"></script>%n", jsBasePath.value,
                     name);
             out.println("  </body>");

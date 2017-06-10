@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "test": "ava"
   },
   "dependencies": {
     "axios": "^0.16.1",
@@ -15,6 +16,7 @@
     "vue": "^2.2.1"
   },
   "devDependencies": {
+    "ava": "^0.19.1",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-latest": "^6.0.0",
@@ -29,5 +31,25 @@
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
+  },
+  "ava": {
+    "files": [
+        "src/main/js/test/**/*.js"
+    ],
+    "source": [
+        "src/main/js/**/*.js",
+        "!src/main/js/test/**/*.js"
+    ],
+    "require": [
+        "babel-register"
+    ],
+    "babel": {
+        "babelrc": true,
+        "presets": [
+            "es2015",
+            "es2016",
+            "es2017"
+        ]
+    }
   }
 }

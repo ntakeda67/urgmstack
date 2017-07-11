@@ -3,7 +3,7 @@
     <h1 class="title">Spring Boot + Doma + Vue Sample</h1>
     <div class="content">
       <ul>
-        <li v-for="menuItem in menuItems">
+        <li v-for="menuItem in menuItems" :key="menuItem">
           <a :href="menuItem + '.html'">{{ menuItem }}</a>
         </li>
       </ul>
@@ -13,11 +13,12 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       menuItems: [
         'hello',
-        'login'
+        'login',
+        'pages'
       ]
     }
   }

@@ -1,3 +1,3 @@
-const hellowrold = name => "Hello, " + name + "!"
+const hellowrold = name => `Hello, ${name}!`
 
 export default hellowrold

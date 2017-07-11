@@ -1,16 +1,7 @@
 <template>
-  <div class="section">
-    <h1 class="title">Pages</h1>
-    <p class="field">
-      <button class="button is-info" @click="toPage1">
-        Page1
-      </button>
-      <button class="button is-primary" @click="toPage2">
-        Page2
-      </button>
-    </p>
+  <keep-alive include="Page1">
     <component :is="view"></component>
-  </div>
+  </keep-alive>
 </template>
 
 <script>

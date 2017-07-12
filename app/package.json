@@ -13,6 +13,7 @@
     "axios": "^0.16.2",
     "bulma": "^0.4.3",
     "font-awesome": "^4.7.0",
+    "handsontable": "^0.33.0",
     "vue": "^2.3.4",
     "vuex": "^2.3.1"
   },

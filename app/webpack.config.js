@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 var fs = require('fs')
 
-const vendor = { vendor: ['vue', 'axios'] }
+const vendor = { vendor: ['vue', 'vuex', 'axios', 'handsontable'] }
 const entries = fs.readdirSync('./src/main/js')
                   .filter(a => /\.js$/.test(a))
                   .reduce((acc, x) => {

@@ -18,7 +18,8 @@ export default {
       menuItems: [
         'hello',
         'login',
-        'pages'
+        'pages',
+        'grid'
       ]
     }
   }
